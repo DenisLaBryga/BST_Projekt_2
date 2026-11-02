@@ -43,3 +43,11 @@ void DrzewoBST::dodajElement(int wartosc) {
     }
 }
 
+int DrzewoBST::znajdzMinimum(int indeks) const {
+    int aktualny = indeks;
+    while (aktualny != -1 && wezly[aktualny].lewy != -1) {
+        aktualny = wezly[aktualny].lewy;
+    }
+    return aktualny;
+}
+
