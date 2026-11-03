@@ -82,3 +82,16 @@ int DrzewoBST::usunWezelRekurencyjnie(int indeks, int wartosc) {
     return indeks;
 }
 
+void DrzewoBST::usunElement(int wartosc) {
+    if (czyPuste()) {
+        cout << "Drzewo jest puste. Nie mozna usunac elementu." << endl;
+        return;
+    }
+    korzen = usunWezelRekurencyjnie(korzen, wartosc);
+}
+
+void DrzewoBST::usunCaleDrzewo() {
+    wezly.clear();
+    korzen = -1;
+    cout << "Cale drzewo zostalo usuniete (kontener STL wyczyszczony)." << endl;
+}
