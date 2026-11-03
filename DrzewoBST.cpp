@@ -51,3 +51,34 @@ int DrzewoBST::znajdzMinimum(int indeks) const {
     return aktualny;
 }
 
+int DrzewoBST::usunWezelRekurencyjnie(int indeks, int wartosc) {
+    if (indeks == -1) {
+        cout << "Nie znaleziono elementu " << wartosc << " do usuniecia." << endl;
+        return -1;
+    }
+
+    if (wartosc < wezly[indeks].wartosc) {
+        wezly[indeks].lewy = usunWezelRekurencyjnie(wezly[indeks].lewy, wartosc);
+    }
+    else if (wartosc > wezly[indeks].wartosc) {
+        wezly[indeks].prawy = usunWezelRekurencyjnie(wezly[indeks].prawy, wartosc);
+    }
+    else {
+        // Znaleziono wezel do usuniecia
+        // Przypadek 1 i 2: Wezel nie ma dzieci lub ma tylko jedno dziecko
+        if (wezly[indeks].lewy == -1) {
+            return wezly[indeks].prawy;
+        }
+        else if (wezly[indeks].prawy == -1) {
+            return wezly[indeks].lewy;
+        }
+
+        // Przypadek 3: Wezel ma dwoje dzieci
+        // Znajdujemy najmniejszy element w prawym poddrzewie (nastepnik inorder)
+        int temp = znajdzMinimum(wezly[indeks].prawy);
+        wezly[indeks].wartosc = wezly[temp].wartosc;
+        wezly[indeks].prawy = usunWezelRekurencyjnie(wezly[indeks].prawy, wezly[temp].wartosc);
+    }
+    return indeks;
+}
+
