@@ -153,7 +153,6 @@ void DrzewoBST::postorder(int indeks, ostream& strumien) const {
     postorder(wezly[indeks].prawy, strumien);
     strumien << wezly[indeks].wartosc << " ";
 }
-}
 
 void DrzewoBST::rysujDrzewo(int indeks, int wciecie, ostream& strumien) const {
     if (indeks == -1) return;
@@ -171,4 +170,45 @@ void DrzewoBST::rysujDrzewo(int indeks, int wciecie, ostream& strumien) const {
 
     // Nastepnie rysujemy lewe poddrzewo (na dole)
     rysujDrzewo(wezly[indeks].lewy, wciecie, strumien);
+}
+
+void DrzewoBST::wyswietlDrzewo() const {
+    if (czyPuste()) {
+        cout << "Drzewo jest puste." << endl;
+        return;
+    }
+
+    cout << "\n=== GRAFICZNA REPREZENTACJA DRZEWA (obrocone o 90 stopni w lewo) ===" << endl;
+    rysujDrzewo(korzen, 0, cout);
+    cout << "====================================================================" << endl;
+
+    cout << "\nWybierz metode wypisania elementow:" << endl;
+    cout << "1. Preorder (Korzen -> Lewy -> Prawy)" << endl;
+    cout << "2. Inorder (Lewy -> Korzen -> Prawy)" << endl;
+    cout << "3. Postorder (Lewy -> Prawy -> Korzen)" << endl;
+    cout << "Twoj wybor: ";
+
+    int wybor;
+    cin >> wybor;
+
+    switch (wybor) {
+    case 1:
+        cout << "Preorder: ";
+        preorder(korzen, cout);
+        cout << endl;
+        break;
+    case 2:
+        cout << "Inorder: ";
+        inorder(korzen, cout);
+        cout << endl;
+        break;
+    case 3:
+        cout << "Postorder: ";
+        postorder(korzen, cout);
+        cout << endl;
+        break;
+    default:
+        cout << "Niepoprawny wybor metody wyswietlania." << endl;
+        break;
+    }
 }
