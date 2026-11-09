@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="BST_Projekt_2.cpp" />
     <ClCompile Include="DrzewoBST.cpp" />
+    <ClCompile Include="ObslugaPlikow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrzewoBST.h" />
