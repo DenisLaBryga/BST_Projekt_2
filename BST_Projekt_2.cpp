@@ -29,3 +29,96 @@ void wyswietlMenu() {
     cout << "=================================================" << endl;
     cout << "Wybierz opcje: ";
 }
+
+/**
+ * @brief Glowna funkcja programu.
+ * @return Kod zakonczenia programu (0).
+ */
+int main() {
+    setlocale(LC_ALL, "");
+
+    DrzewoBST drzewo;
+    ObslugaPlikow pliki;
+    int opcja = -1;
+
+    while (opcja != 0) {
+        wyswietlMenu();
+        if (!(cin >> opcja)) {
+            // Zabezpieczenie przed wpisaniem litery zamiast liczby w menu
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Blad: Prosze podac poprawny numer opcji." << endl;
+            opcja = -1;
+            continue;
+        }
+
+        int wartosc;
+        string nazwaPliku;
+
+        switch (opcja) {
+        case 1:
+            cout << "Podaj liczbe calkowita do dodania: ";
+            cin >> wartosc;
+            drzewo.dodajElement(wartosc);
+            break;
+
+        case 2:
+            cout << "Podaj liczbe calkowita do usuniecia: ";
+            cin >> wartosc;
+            drzewo.usunElement(wartosc);
+            break;
+
+        case 3:
+            drzewo.usunCaleDrzewo();
+            break;
+
+        case 4:
+            cout << "Podaj element, do ktorego chcesz znalezc droge: ";
+            cin >> wartosc;
+            drzewo.szukajDrogi(wartosc);
+            break;
+
+        case 5:
+            drzewo.wyswietlDrzewo();
+            break;
+
+        case 6:
+            cout << "Podaj nazwe pliku tekstowego do zapisu (np. drzewo.txt): ";
+            cin >> nazwaPliku;
+            drzewo.zapisTekstowy(nazwaPliku);
+            break;
+
+        case 7:
+            cout << "Podaj nazwe pliku binarnego do zapisu (np. drzewo.bin): ";
+            cin >> nazwaPliku;
+            pliki.zapisBinarny(drzewo, nazwaPliku);
+            break;
+
+        case 8:
+            cout << "Podaj nazwe pliku binarnego do odczytu (np. drzewo.bin): ";
+            cin >> nazwaPliku;
+            pliki.odczytBinarny(drzewo, nazwaPliku);
+            break;
+
+        case 9: {
+            cout << "Podaj nazwe pliku tekstowego z liczbami (np. liczby.txt): ";
+            cin >> nazwaPliku;
+            cout << "Czy chcesz wyczyscic obecne drzewo przed wczytaniem? (1 - Tak / 0 - Nie, dopisz do istniejacego): ";
+            int czyWyczyscic;
+            cin >> czyWyczyscic;
+            pliki.wczytajLiczbyZPliku(drzewo, nazwaPliku, czyWyczyscic == 1);
+            break;
+        }
+
+        case 0:
+            cout << "Zamykanie programu..." << endl;
+            break;
+
+        default:
+            cout << "Nieznana opcja. Wybierz numer od 0 do 9." << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
