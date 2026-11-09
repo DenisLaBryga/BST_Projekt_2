@@ -153,7 +153,6 @@ void DrzewoBST::postorder(int indeks, ostream& strumien) const {
     postorder(wezly[indeks].prawy, strumien);
     strumien << wezly[indeks].wartosc << " ";
 }
-}
 
 void DrzewoBST::rysujDrzewo(int indeks, int wciecie, ostream& strumien) const {
     if (indeks == -1) return;
@@ -171,4 +170,32 @@ void DrzewoBST::rysujDrzewo(int indeks, int wciecie, ostream& strumien) const {
 
     // Nastepnie rysujemy lewe poddrzewo (na dole)
     rysujDrzewo(wezly[indeks].lewy, wciecie, strumien);
+}
+
+void DrzewoBST::zapisTekstowy(const string& nazwaPliku) const {
+    if (czyPuste()) {
+        cout << "Drzewo jest puste. Brak danych do zapisania." << endl;
+        return;
+    }
+
+    ofstream plik(nazwaPliku);
+    if (!plik.is_open()) {
+        cout << "Blad: Nie udalo sie otworzyc pliku " << nazwaPliku << " do zapisu." << endl;
+        return;
+    }
+
+    plik << "=== STRUKTURA DRZEWA BST ===" << endl;
+    rysujDrzewo(korzen, 0, plik);
+    plik << "\n============================" << endl;
+
+    plik << "Preorder:  ";
+    preorder(korzen, plik);
+    plik << "\nInorder:   ";
+    inorder(korzen, plik);
+    plik << "\nPostorder: ";
+    postorder(korzen, plik);
+    plik << endl;
+
+    plik.close();
+    cout << "Drzewo zostalo zapisane tekstowo do pliku: " << nazwaPliku << endl;
 }
