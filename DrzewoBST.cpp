@@ -132,3 +132,10 @@ void DrzewoBST::szukajDrogi(int wartosc) const {
         cout << "Element " << wartosc << " nie istnieje w drzewie." << endl;
     }
 }
+
+void DrzewoBST::inorder(int indeks, ostream& strumien) const {
+    if (indeks == -1) return;
+    inorder(wezly[indeks].lewy, strumien);
+    strumien << wezly[indeks].wartosc << " ";
+    inorder(wezly[indeks].prawy, strumien);
+}
