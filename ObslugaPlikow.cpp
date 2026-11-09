@@ -57,7 +57,7 @@ bool ObslugaPlikow::odczytBinarny(DrzewoBST& drzewo, const string& nazwaPliku) c
 bool ObslugaPlikow::wczytajLiczbyZPliku(DrzewoBST& drzewo, const string& nazwaPliku, bool wyczyscIstniejace) const {
     ifstream plik(nazwaPliku);
     if (!plik.is_open()) {
-        cout << "Blad " << nazwaPliku << "." << endl;
+        cout << "Blad: Nie mozna otworzyc pliku tekstowego " << nazwaPliku << "." << endl;
         return false;
     }
 
@@ -69,7 +69,7 @@ bool ObslugaPlikow::wczytajLiczbyZPliku(DrzewoBST& drzewo, const string& nazwaPl
     int licznik = 0;
     while (plik >> liczba) {
         drzewo.dodajElement(liczba);
-        liczba++;
+        licznik++;
     }
 
     plik.close();
