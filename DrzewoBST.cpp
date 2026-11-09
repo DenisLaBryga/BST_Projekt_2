@@ -212,3 +212,32 @@ void DrzewoBST::wyswietlDrzewo() const {
         break;
     }
 }
+}
+
+void DrzewoBST::zapisTekstowy(const string& nazwaPliku) const {
+    if (czyPuste()) {
+        cout << "Drzewo jest puste. Brak danych do zapisania." << endl;
+        return;
+    }
+
+    ofstream plik(nazwaPliku);
+    if (!plik.is_open()) {
+        cout << "Blad: Nie udalo sie otworzyc pliku " << nazwaPliku << " do zapisu." << endl;
+        return;
+    }
+
+    plik << "=== STRUKTURA DRZEWA BST ===" << endl;
+    rysujDrzewo(korzen, 0, plik);
+    plik << "\n============================" << endl;
+
+    plik << "Preorder:  ";
+    preorder(korzen, plik);
+    plik << "\nInorder:   ";
+    inorder(korzen, plik);
+    plik << "\nPostorder: ";
+    postorder(korzen, plik);
+    plik << endl;
+
+    plik.close();
+    cout << "Drzewo zostalo zapisane tekstowo do pliku: " << nazwaPliku << endl;
+}
