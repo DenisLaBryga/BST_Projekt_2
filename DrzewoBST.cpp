@@ -146,3 +146,10 @@ void DrzewoBST::inorder(int indeks, ostream& strumien) const {
     strumien << wezly[indeks].wartosc << " ";
     inorder(wezly[indeks].prawy, strumien);
 }
+
+void DrzewoBST::postorder(int indeks, ostream& strumien) const {
+    if (indeks == -1) return;
+    postorder(wezly[indeks].lewy, strumien);
+    postorder(wezly[indeks].prawy, strumien);
+    strumien << wezly[indeks].wartosc << " ";
+}
