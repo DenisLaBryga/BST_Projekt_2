@@ -76,6 +76,7 @@ int main() {
             cout << "Podaj element, do ktorego chcesz znalezc droge: ";
             cin >> wartosc;
             drzewo.szukajDrogi(wartosc);
+            break;
 
         case 5:
             drzewo.wyswietlDrzewo();
@@ -90,6 +91,7 @@ int main() {
         case 7:
             cout << "Podaj nazwe pliku binarnego do zapisu (np. drzewo.bin): ";
             cin >> nazwaPliku;
+            pliki.zapisBinarny(drzewo, nazwaPliku);
             break;
 
         case 8:
@@ -102,7 +104,10 @@ int main() {
             cout << "Podaj nazwe pliku tekstowego z liczbami (np. liczby.txt): ";
             cin >> nazwaPliku;
             cout << "Czy chcesz wyczyscic obecne drzewo przed wczytaniem? (1 - Tak / 0 - Nie, dopisz do istniejacego): ";
-            
+            int czyWyczyscic;
+            cin >> czyWyczyscic;
+            pliki.wczytajLiczbyZPliku(drzewo, nazwaPliku, czyWyczyscic == 1);
+            break;
         }
 
         case 0:
