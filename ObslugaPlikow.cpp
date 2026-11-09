@@ -53,3 +53,26 @@ bool ObslugaPlikow::odczytBinarny(DrzewoBST& drzewo, const string& nazwaPliku) c
     cout << "Pomyslnie odtworzono drzewo z pliku binarnego: " << nazwaPliku << endl;
     return true;
 }
+
+bool ObslugaPlikow::wczytajLiczbyZPliku(DrzewoBST& drzewo, const string& nazwaPliku, bool wyczyscIstniejace) const {
+    ifstream plik(nazwaPliku);
+    if (!plik.is_open()) {
+        cout << "Blad: Nie mozna otworzyc pliku tekstowego " << nazwaPliku << "." << endl;
+        return false;
+    }
+
+    if (wyczyscIstniejace) {
+        drzewo.usunCaleDrzewo();
+    }
+
+    int liczba;
+    int licznik = 0;
+    while (plik >> liczba) {
+        drzewo.dodajElement(liczba);
+        licznik++;
+    }
+
+    plik.close();
+    cout << "Wczytano " << licznik << " liczb z pliku tekstowego: " << nazwaPliku << endl;
+    return true;
+}
