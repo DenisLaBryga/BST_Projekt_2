@@ -212,7 +212,6 @@ void DrzewoBST::wyswietlDrzewo() const {
         break;
     }
 }
-}
 
 void DrzewoBST::zapisTekstowy(const string& nazwaPliku) const {
     if (czyPuste()) {
