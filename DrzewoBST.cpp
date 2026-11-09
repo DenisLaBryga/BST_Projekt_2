@@ -146,3 +146,21 @@ void DrzewoBST::inorder(int indeks, ostream& strumien) const {
     strumien << wezly[indeks].wartosc << " ";
     inorder(wezly[indeks].prawy, strumien);
 }
+
+void DrzewoBST::rysujDrzewo(int indeks, int wciecie, ostream& strumien) const {
+    if (indeks == -1) return;
+
+    wciecie += 6;
+    // Najpierw rysujemy prawe poddrzewo (u gory)
+    rysujDrzewo(wezly[indeks].prawy, wciecie, strumien);
+
+    // Wypisujemy biezacy wezel po odpowiednim wcieciu
+    strumien << endl;
+    for (int i = 6; i < wciecie; i++) {
+        strumien << " ";
+    }
+    strumien << "--- " << wezly[indeks].wartosc << endl;
+
+    // Nastepnie rysujemy lewe poddrzewo (na dole)
+    rysujDrzewo(wezly[indeks].lewy, wciecie, strumien);
+}
