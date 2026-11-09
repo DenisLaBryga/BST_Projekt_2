@@ -133,6 +133,13 @@ void DrzewoBST::szukajDrogi(int wartosc) const {
     }
 }
 
+void DrzewoBST::preorder(int indeks, ostream& strumien) const {
+    if (indeks == -1) return;
+    strumien << wezly[indeks].wartosc << " ";
+    preorder(wezly[indeks].lewy, strumien);
+    preorder(wezly[indeks].prawy, strumien);
+}
+
 void DrzewoBST::inorder(int indeks, ostream& strumien) const {
     if (indeks == -1) return;
     inorder(wezly[indeks].lewy, strumien);
